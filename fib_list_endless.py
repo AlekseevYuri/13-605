@@ -1,6 +1,6 @@
 import numpy
 import itertools
-spisok  = [1,1]
+spisok  = [1,1,2,3,5,8,13,21,34,55,89]
 class el:    
   
     
@@ -14,7 +14,7 @@ class el:
                 print("DONE!")
                 raise StopIteration()
             else:
-                if self.i >= 2:#Если список кончился, он продлевается при итерации.
+                if self.i > 10:#Если список кончился, он продлевается при итерации.
                     self.els +=[spisok[-1]+spisok[-2]]
                     j = self.i
                     self.i += 1
