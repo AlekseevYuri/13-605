@@ -7,7 +7,7 @@ import seaborn as sns
 import random
 import math
 import pylab
-
+from scipy import stats
 
 data = [1.645533,
 1.662017,
@@ -63,7 +63,9 @@ data = [1.645533,
 
 dfr = pandas.DataFrame(data )
 print (dfr.describe())
-#Анализ распределения с помощью pandas
+
+print(stats.kstest(dfr, 'norm', (dfr.mean(), dfr.std()), N=len(dfr)))
+#Анализ распределения с помощью pandas и теста Колмогорова-Смирнова
 
 
 
