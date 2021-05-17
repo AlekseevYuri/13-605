@@ -54,4 +54,4 @@ data = [1.645533,
 n  = [i+1 for i in range(0,50)]
 db = pandas.DataFrame({'Эксперимент': n, 'Масса' : data})
 
-db.to_csv('db'.csv)
+db.to_csv('db.csv')
