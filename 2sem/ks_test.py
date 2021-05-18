@@ -4,29 +4,22 @@ import seaborn as sns
 import math
 from scipy import stats
 
-#baza proverka
-#baza priem
+df = pandas.read_csv('db.csv', sep=',')
 
-dfr = pandas.read_csv('db.csv', sep=',')
-
-data = dfr['Масса']
-
+data = df['Масса']
 dfr = pandas.DataFrame(data)
 print (dfr.describe())
 
-print(stats.kstest(dfr['Масса'], 'norm', (dfr['Масса'].mean(), dfr['Масса'].std()), N=len(dfr)))
+print(stats.kstest(df['Масса'], 'norm', (df['Масса'].mean(), df['Масса'].std()), N=len(df)))#Анализируются только результаты, номера экспериментов сюда не попадают.
 
 #Анализ распределения с помощью pandas и теста Колмогорова-Смирнова
 
 
-print(data)
-
-
 
 #
 #
 #
-if True:
+if 1:
     D = 0
 
     for da in data:#Среднее
