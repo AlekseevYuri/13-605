@@ -1,4 +1,10 @@
 import sqlite3 as dbms
+import sqlalchemy
+from sqlalchemy import Table, Column, Integer, String, MetaData, ForeignKey
+from sqlalchemy.orm import sessionmaker, relationship
+from sqlalchemy.ext.declarative import declarative_base
+import sys
+
 import random
 conn = dbms.connect("students.sqlite3")  # Как оригинально!
 cursor = conn.cursor()
@@ -7,19 +13,22 @@ with open("11.drop_ddl.sql", 'r', encoding='utf-8') as f:
     drop_ddl = f.read()
 with open("11.create_ddl.sql", 'r', encoding='utf-8') as f:
     create_ddl = f.read()
+with open("11.insert_dml.sql", 'r', encoding='utf-8') as f:
+    insert_dml = f.read()
 
+
+
+    
 if True:
     cursor.executescript(drop_ddl)
     conn.commit()
 if True:
     cursor.executescript(create_ddl)
     conn.commit()
-
-import sqlalchemy
-from sqlalchemy import Table, Column, Integer, String, MetaData, ForeignKey
-from sqlalchemy.orm import sessionmaker, relationship
-from sqlalchemy.ext.declarative import declarative_base
-
+if True:
+    cursor.executescript(insert_dml)
+    conn.commit()
+    
 DeclBase = declarative_base()
 
 engine = sqlalchemy.create_engine('sqlite:///students.sqlite3', echo=False)  # echo=True для логгинга
@@ -42,6 +51,9 @@ class Program(DeclBase):
     def __init__(self, name):
         self.name = name
 
+
+
+
 class Student(DeclBase):
     __tablename__ = 'students'
     id = Column(Integer, primary_key=True)
@@ -59,17 +71,21 @@ class Student(DeclBase):
         self.name = name
         self.patronymic = patronymic
         self.program = program
+
+
+
         
 class Course(DeclBase):
     __tablename__ = 'courses'
     id = Column(Integer, primary_key=True)
     name = Column(String)
-    
-    programs_courses = relationship("Program_course", backref="course")
     marks = relationship("Mark", backref="course")
+    programs_courses = relationship("Program_course", backref="course")
+    
     
     def __init__(self, name):
         self.name = name
+
         
 class Program_course(DeclBase):
     __tablename__ = 'programs_courses'
@@ -77,6 +93,7 @@ class Program_course(DeclBase):
     
     course_id = Column(Integer, ForeignKey('courses.id'), primary_key=True)
     program_id = Column(Integer, ForeignKey('programs.id'), primary_key=True)
+
     
     def __init__(self, semester_number, course, program):
         self.semester_number = semester_number
@@ -85,9 +102,12 @@ class Program_course(DeclBase):
         
 class Mark(DeclBase):
     __tablename__ = 'marks'
+
+    
     mark = Column(Integer)
     
     course_id = Column(Integer, ForeignKey('courses.id'), primary_key=True)
+    
     student_id = Column(Integer, ForeignKey('students.id'), primary_key=True)
     
     def __init__(self, mark, student, course):
@@ -214,7 +234,7 @@ session.commit()
 
 
 
-import sys
+
 
 print("____________УЧЕБНЫЙ ПЛАН____________")
 print("____________________________________")
@@ -234,7 +254,7 @@ print("____________________________________")
 
 print("ОБЩАЯ УСПЕВАЕМОСТЬ:")
 for sss in session.query(Student):
-    print(sss.surname,sss.name,sss.patronymic,"получил:")
+    print(sss.surname,sss.name,sss.patronymic,"получует:")
     for s in sss.marks:
         print(s.course.name,"- ", s.mark)
     print("____________________________________")
