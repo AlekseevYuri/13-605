@@ -9,7 +9,7 @@ def c(x):
 def draw(a):
     v = [a,a]
     
-    for i in range (0,10):
+    for i in range (0,5):
         tl.goto(v[0],v[1])
         
         a += c(a)
@@ -18,4 +18,6 @@ def draw(a):
         t=v[0]*c(a)+v[1]*c(c(a))
         v[1]=v[0]*c(c(c(a)))+v[1]*c(c(c(c(a))))
         v[0] =t
-    tl.done()
+    #tl.done()
+    
+
