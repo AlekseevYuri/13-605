@@ -7,7 +7,7 @@ def vvod(x):
         try:
             a = int(q.get())
         except:
-            pass
+            a = 1
 
         frame.destroy()
         
