@@ -26,7 +26,7 @@ model.compile(
     metrics='accuracy'
 )
 
-if  False and os.path.isfile("smart_duckling_colab.h5"):
+if  os.path.isfile("smart_duckling_colab.h5"):
     print("Loading existing synapses...")
     model.load_weights("smart_duckling_colab.h5")
 else:
