@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>Проверка числа на простоту перебором делителей.</p>
+<p>{{name}}</p>
+
+<form action="/test" method="GET">
+    <input type="number" name="name" />
+    <input type="submit" value="Get!">
+  </form>
+
+{% endblock %}

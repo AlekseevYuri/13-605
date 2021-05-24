@@ -2,3 +2,4 @@ __pycache__/
 .gitignore
 proverka.py
 dumb_duckling.h5
+.idea
