@@ -1,6 +1,7 @@
 import tkinter
 import time
-import simpletest as st
+import pack1
+from pack1 import simpletest as st
 elochka = "        W        "
 def click():
     global elochka
@@ -31,7 +32,7 @@ def click():
 
 
 frame = tkinter.Tk()
-frame.geometry('150x4000')
+frame.geometry('170x4000')
 frame.title("Проверить на простоту")
 frame
 
